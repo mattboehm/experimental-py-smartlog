@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-#!/usr/bin/env python
 
 """logging utilities"""
 
@@ -46,3 +45,23 @@ def log_call(logger=None, log_result=True, log_exceptions=True, log_params=True)
         return inner
     return wrapper
 
+@log_call()
+def foo():
+    bar()
+
+@log_call()
+def bar():
+    baz()
+    baz()
+
+@log_call()
+def baz():
+    logging.debug("I'm in ur base bazzing ur doodz")
+    sys.stderr.write("baz\n")
+
+def main():
+    config_logging()
+    foo()
+
+if __name__ == '__main__':
+    main()
